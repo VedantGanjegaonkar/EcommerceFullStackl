@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
             this.router.navigate(['/adminHome']);
           }else{
-            this.router.navigate(['/home']); // Redirect to home page on success
+            this.router.navigate(['/products']); // Redirect to home page on success
               console.log("hello user");
 
           }

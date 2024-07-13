@@ -12,6 +12,6 @@ router.post('/create',upload.fields([{
     name: "images",
     maxCount: 1,
 }]) , userController.createProduct);
-router.get('/all', userController.getAllBooks);
-
+router.get('/', userController.getAllBooks);
+router.get('/:id', userController.getProductById);
 export default router

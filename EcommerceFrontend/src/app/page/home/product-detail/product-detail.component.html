@@ -1,0 +1,18 @@
+<div class="container" *ngIf="product">
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p><strong>Price:</strong> {{ product.price | currency }}</p>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+    <p><strong>Vendor:</strong> {{ product.vendor }}</p>
+    <div *ngIf="product.images">
+      <img [src]="product.images" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <img src="public/uploads/1720767307318-th.jfif" alt="test-img">
+    <button (click)="toProductList()" class="btn btn-secondary mt-3">Back</button>
+
+    <label for="">Qut</label>
+    <input type="number" name="" id="" [value]="qnt">
+    <button (click)="addToCart()" class="btn btn-danger mt-3">Add to cart</button>
+
+  </div>
+  

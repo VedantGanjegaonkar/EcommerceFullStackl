@@ -3,6 +3,7 @@ import { Request, Response,NextFunction } from 'express';
 import{errorHandler} from "../middleware/errorHandler"
 import { ApiHandler } from "../utils/apiHandler";
 import { UserService } from '../services/user.service';
+import { IProduct } from "../models/product.model";
 
 export class ProduController{
 
@@ -15,6 +16,7 @@ export class ProduController{
 
         this.createProduct=this.createProduct.bind(this)
         this.getAllBooks=this.getAllBooks.bind(this)
+        this.getProductById=this.getProductById.bind(this)
     }
     // name: string;
     // description: string;
@@ -67,9 +69,19 @@ export class ProduController{
             const result :any = await this.productservice.getAllBooksService(params);
        
 
-                res.status(200).json({ result });
+                res.status(200).json( result );
 
                    
+        } catch (err:any) {
+            errorHandler(err,req,res,next)
+        }
+    }
+    public async getProductById(req: Request, res: Response,next:NextFunction){
+        try {
+            const id = req.params.id;
+            const product = await this.productservice.findProductByid(id)
+            res.status(200).json({product});
+
         } catch (err:any) {
             errorHandler(err,req,res,next)
         }

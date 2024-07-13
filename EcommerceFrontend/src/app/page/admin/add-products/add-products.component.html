@@ -13,7 +13,7 @@
         <label for="price">Price</label>
         <input type="number" id="price" class="form-control" formControlName="price">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Categories</label>
         <div *ngFor="let category of categories">
           <div class="form-check">
@@ -21,6 +21,12 @@
             <label class="form-check-label">{{ category.name }}</label>
           </div>
         </div>
+      </div> -->
+      <div class="form-group">
+        <label>Categories</label>
+        <select name="" id="" multiple class="form-control" formControlName="category">
+          <option *ngFor="let category of categories" [value]="category?._id">{{ category?.name }}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="stock">Stock</label>

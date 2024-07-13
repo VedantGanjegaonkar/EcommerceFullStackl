@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Product List</h2>
+    <div *ngFor="let product of products" class="card mb-3 d-flex justify-content-centre">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><strong>Price:</strong> {{ product.price | currency }}</p>
+        <p class="card-text"><strong>Stock:</strong> {{ product.stock }}</p>
+        <div *ngIf="product.images">
+            <img [src]="product.images" class="img-fluid" alt="{{ product.name }}">
+          </div>
+        <a (click)="viewProductDetails(product._id)" class="btn btn-primary">View Details</a>
+      </div>
+    </div>
+</div>
+  

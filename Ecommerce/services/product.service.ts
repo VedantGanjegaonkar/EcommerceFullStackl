@@ -113,12 +113,6 @@ export class ProductService {
 
     if (params.category) {
 
-      // let categoryArray: any[] = [];
-      // categoryArray.push(params.category)
-      // console.log(categoryArray);
-      // let flag = Array.isArray(params.category);
-      // console.log(flag);
-
       if (Array.isArray(params.category)) {
 
         pipeline.push({
@@ -137,8 +131,6 @@ export class ProductService {
         });
 
       }
-
-
 
     }
 
@@ -283,7 +275,10 @@ export class ProductService {
   };
 
 
-  public async findProductByid(productID: string): Promise<IProduct> {
+  public async findProductByid(productID: string|null): Promise<IProduct> {
+    if (!productID) {
+      throw new NotFoundError('Product ID is required');
+    }
     const product = await Product.findById(productID);
 
     if (!product) {

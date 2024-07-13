@@ -9,10 +9,12 @@ import { ProductService } from 'src/app/core/services/product.service';
 })
 export class AddProductsComponent implements OnInit {
   productForm!: FormGroup;
-  categories = [
-    { _id: '665471f061af1ee31ccc7a0b', name: 'Category 1' },
-    { _id: '665471f861af1ee31ccc7a0e', name: 'Category 2' }
-  ];
+  // categories = [
+  //   { _id: '665471f061af1ee31ccc7a0b', name: 'Category 1' },
+  //   { _id: '665471f861af1ee31ccc7a0e', name: 'Category 2' }
+  // ];
+  categories:any = [];
+
   selectedFiles: File[] = [];
 
   constructor(private fb: FormBuilder, private productService : ProductService) { }
@@ -22,29 +24,33 @@ export class AddProductsComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
-      category: this.fb.array([], Validators.required),
+      category: [null,Validators.required],
       stock: [0, Validators.required],
       images: ['', Validators.required],
       vendor: ['', Validators.required]
     });
+
+    this.getCategories()
+    console.log("categories",this.categories);
+    
   }
 
-  onCategoryChange(e: any, categoryId: string) {
-    const categoryArray: FormArray = this.productForm.get('category') as FormArray;
-    if (e.target.checked) {
-      categoryArray.push(new FormControl(categoryId));
-    } else {
-      const index = categoryArray.controls.findIndex(x => x.value === categoryId);
-      if (index !== -1) {
-        categoryArray.removeAt(index);
-      }
-    }
-  }
+  // onCategoryChange(e: any, categoryId: string) {
+  //   const categoryArray: FormArray = this.productForm.get('category') as FormArray;
+  //   if (e.target.checked) {
+  //     categoryArray.push(new FormControl(categoryId));
+  //   } else {
+  //     const index = categoryArray.controls.findIndex(x => x.value === categoryId);
+  //     if (index !== -1) {
+  //       categoryArray.removeAt(index);
+  //     }
+  //   }
+  // }
 
-  isChecked(categoryId: string): boolean {
-    const categoryArray: FormArray = this.productForm.get('category') as FormArray;
-    return categoryArray.controls.some(control => control.value === categoryId);
-  }
+  // isChecked(categoryId: string): boolean {
+  //   const categoryArray: FormArray = this.productForm.get('category') as FormArray;
+  //   return categoryArray.controls.some(control => control.value === categoryId);
+  // }
 
   onFileSelected(event: any) {
     if (event.target.files) {
@@ -53,8 +59,23 @@ export class AddProductsComponent implements OnInit {
       }
     }
   }
+  getCategories(){
+
+    this.productService.getCategories().subscribe(
+      (data) => {
+        this.categories = data;
+        console.log("categories Data:",data);
+      },
+      (error) => {
+        console.error('Error fetching quiz:', error);
+      }
+    );
+    console.log("categories",this.categories);
+  }
 
   onSubmit() {
+    console.log(this.productForm);
+    
     const formData: FormData = new FormData();
     formData.append('name', this.productForm.get('name')?.value);
     formData.append('description', this.productForm.get('description')?.value);

@@ -25,10 +25,11 @@ export class CartController{
 
         try {
             const authHeader = req.headers['authorization'];
-            const {productID,qnt} = req.body
+            const {productId,qnt} = req.body
+            console.log("this is req.body:",req.body);
     
             const userID= await this.userService.getUserId(authHeader)
-            const newCart = await this.cartService.addProductToCart(userID,productID,qnt)
+            const newCart = await this.cartService.addProductToCart(userID,productId,qnt)
 
             res.status(200).json({message:"Product added to cart success", cart:newCart })
             
@@ -42,8 +43,7 @@ export class CartController{
         try {
 
             const {userID,productID} = req.body
-    
-            
+
             const newCart = await this.cartService.deleteProductFromCart(userID,productID)
 
             res.status(200).json({message:"Product deleted from cart success", cart:newCart })

@@ -37,6 +37,5 @@ export class CategoryController {
             res.status(500).json({ message: 'Failed to create category', error: err.message });
         }
 
-        
     }
 }

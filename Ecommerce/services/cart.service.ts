@@ -9,6 +9,9 @@ export class CartService{
         // Find the user's cart
         let cart = await Cart.findOne({ user: userID });
 
+        console.log("prod ID:",productID);
+        
+
         const product = await Product.findById(productID);
         if (!product) {
             throw new NotFoundError("Product not found");
