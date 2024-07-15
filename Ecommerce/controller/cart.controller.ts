@@ -16,8 +16,22 @@ export class CartController{
         this.addProduct=this.addProduct.bind(this)
         this.deleteProduct=this.deleteProduct.bind(this)
         this.clearCart=this.clearCart.bind(this)
-
+        this.getCart=this.getCart.bind(this)
        
+    }
+
+    public async getCart(req:Request,res:Response,next:NextFunction){
+        try {
+            const authHeader = req.headers['authorization'];
+            const userID= await this.userService.getUserId(authHeader)
+
+            const userCart=await this.cartService.getCartDetails(userID)
+
+            res.status(200).json(userCart)
+
+        } catch (err:any) {
+             errorHandler(err,req,res,next)
+        }
     }
     
 

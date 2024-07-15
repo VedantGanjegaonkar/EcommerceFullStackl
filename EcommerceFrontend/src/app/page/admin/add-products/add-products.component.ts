@@ -70,7 +70,7 @@ export class AddProductsComponent implements OnInit {
         console.error('Error fetching quiz:', error);
       }
     );
-    console.log("categories",this.categories);
+    // console.log("categories",this.categories);
   }
 
   onSubmit() {

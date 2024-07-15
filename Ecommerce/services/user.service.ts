@@ -55,7 +55,7 @@ export class UserService {
             }
 
            const val= await userValidationSchema.validate(params, { abortEarly: false });
-            console.log("this is val ",val);
+           
             
     
     

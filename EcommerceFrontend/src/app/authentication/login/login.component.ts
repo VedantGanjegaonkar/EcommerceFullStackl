@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: UserService,private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: UserService,private router: Router, private toastr : ToastrService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         response => {
+          this.toastr.success('Login successful!', 'Success');
           console.log('Login successful:here is response', response);
           localStorage.setItem('token', response.token); // Store the token
           if(this.authService.isAdmin()){

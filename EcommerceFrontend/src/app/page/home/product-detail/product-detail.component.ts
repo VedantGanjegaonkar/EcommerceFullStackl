@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ProductDetailComponent implements OnInit {
   product: any;
   qnt:number=1
+  searchText:string="mens Wear"
   imageUrl:string = "public/uploads/1720767307318-th.jfif"
   constructor(
     private route: ActivatedRoute,

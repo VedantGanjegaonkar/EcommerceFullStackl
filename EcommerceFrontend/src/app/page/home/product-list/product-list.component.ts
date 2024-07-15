@@ -15,10 +15,10 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService,private router: Router) { }
 
   ngOnInit(): void {
-    this.productService.getProducts(this.category).subscribe((data: any) => {
+    this.productService.getProducts().subscribe((data: any) => {
       this.products = data.products
-      console.log("prod array:",this.products);
-      console.log("prod data:",data.products);
+     
+      console.log("data:",data);
       
     }, error => {
       console.error('Error fetching products:', error);

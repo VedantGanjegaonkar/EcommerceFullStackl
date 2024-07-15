@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000;
 const dbUrl = process.env.DATABASE_URL as string;
 
 // Middlewares
-app.use("/public",express.static(path.join(__dirname,'/public/uploads')))
+app.use("/public/uploads",express.static(path.join(__dirname,'/public/uploads')))
 app.use(express.json());
 
 //routes

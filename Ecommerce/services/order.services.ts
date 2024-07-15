@@ -35,7 +35,7 @@ public async createOrderFromUserId(userId: string): Promise<IOrder>{
 
             const product= await this.productService.findProductByid(pId)
 
-            
+
             const price= product.price
             console.log("this is product price :",price);
            

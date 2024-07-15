@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Shopping Cart</h2>
+    <div class="list-group">
+      <div *ngFor="let item of cart" class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="cart-item-details">
+          <h5>{{ item.productname }}</h5>
+          <div *ngIf="item.images" class="mb-2">
+            <img [src]="item.images" alt="{{ item.productname }}" class="img-thumbnail" style="max-width: 100px;">
+          </div>
+          <p>Price: {{ item.price | currency }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Total: {{ item.price * item.quantity | currency }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-right mt-4">
+      <h4>Total: {{ total | currency }}</h4>
+    </div>
+  </div>
+
+  

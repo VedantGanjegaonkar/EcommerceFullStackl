@@ -7,6 +7,8 @@ import { AdminModule } from './page/admin/admin.module';
 import { PageModule } from './page/page.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.intercepter';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -15,12 +17,13 @@ import { AuthInterceptor } from './core/interceptors/auth.intercepter';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     AuthenticationModule,
     AdminModule,
-    PageModule
-  
+    PageModule,
+    ToastrModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

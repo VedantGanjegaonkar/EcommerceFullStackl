@@ -11,31 +11,28 @@ import {Category, ICategory} from '../../../../../Ecommerce/models/category.mode
 })
 
 export class ProductService {
-  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
   createProduct(product:any):Observable<IProduct>{
-    return this.http.post<any>(`${this.apiUrl}/product/create`,product);
+    return this.http.post<any>(`product/create`,product);
   }
 
   getCategories():Observable<ICategory[]>{
-    return this.http.get<any>(`${this.apiUrl}/category/get`);
+    return this.http.get<any>(`category/get`);
   }
-  getProducts(category=""): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/product`,{params:{
-      limit: 10,
-      page:2,
-      category:category
-    }
-    });
+  getProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`product`);
   }
 
   getProductById(productId: string|null): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/product/${productId}`);
+    return this.http.get<any>(`product/${productId}`);
   }
   addToCart(productId: string|null,qnt:number):Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/cart/add`,{productId,qnt})
+    return this.http.post<any>(`cart/add`,{productId,qnt})
+  }
+  getCart():Observable<any>{
+    return this.http.get<any>(`cart`)
   }
 
 }

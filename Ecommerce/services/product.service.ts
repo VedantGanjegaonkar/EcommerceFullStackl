@@ -106,7 +106,7 @@ export class ProductService {
 
       }
     }
-    console.log("this is filter query :", filterQuery);
+    // console.log("this is filter query :", filterQuery);
     // { '$match': { '$or': [ [Object], [Object], [Object], [Object] ] } }
 
     pipeline.push(filterQuery)

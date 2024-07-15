@@ -10,22 +10,26 @@ import {IUser  } from '../../../../../Ecommerce/models/user.model';
 })
 
 export class UserService {
-  private apiUrl = 'http://localhost:3000';
+  // private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
   register(user:IUser):Observable<IUser>{
-    return this.http.post<IUser>(`${this.apiUrl}/user/signup`,user);
+    return this.http.post<IUser>(`user/signup`,user);
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/login`, credentials);
+    return this.http.post(`user/login`, credentials);
   }
 
   isLoggedIn(): boolean {
     // Implement your logic to check if the user is logged in
     // For example, check if a token exists in local storage
     return !!localStorage.getItem('token');
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
   }
 
   isAdmin():boolean{

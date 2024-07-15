@@ -1,16 +1,107 @@
-import { Schema } from "mongoose";
+import { Schema} from "mongoose";
+import mongoose from 'mongoose';
 import { Cart, Product,User } from "../models";
 import { NotFoundError, ValidationError } from "../utils/errors";
-
+import {ProductService} from "../services/product.service"
 
 export class CartService{
+
+    private productService:ProductService
+    constructor(){
+        this.productService=new ProductService()
+
+        this.CalCartTotal=this.CalCartTotal.bind(this)
+    }
+
+    public async CalCartTotal(userId:string) {
+        const cart = await Cart.findOne({ user: userId });
+        if (!cart) {
+            throw new NotFoundError('Cart not found');
+        }
+         // Calculate total amount
+         let totalAmount = 0;    
+         await Promise.all(cart.items.map(async (item) => {
+ 
+             const quantity = item.quantity
+             const pId : any =item.product.toString()
+ 
+             const product= await this.productService.findProductByid(pId)
+ 
+             const price= product.price
+             console.log("this is product price :",price);
+            
+             const itemTotal = price * quantity;
+             totalAmount += itemTotal;
+ 
+            console.log("this is totL :",totalAmount);
+            
+         }));
+         return totalAmount
+    }
+
+    public async getCartDetails(userID:string){
+        const userIdInObjectId=new mongoose.Types.ObjectId(userID)
+
+        let pipeline:any[]=[
+            {
+              $match: {
+                user: userIdInObjectId
+              },
+            },
+            
+            {
+              $unwind: {
+                path: "$items",
+                preserveNullAndEmptyArrays: true
+              }
+            },
+            {
+              $lookup: {
+                from: "products",
+                localField: "items.product",
+                foreignField: "_id",
+                as: "productDetails"
+              }
+            },
+            
+            {
+              $unwind: {
+                path: "$productDetails",
+                preserveNullAndEmptyArrays: true
+              }
+            },
+          
+            {
+              $project: {
+                "productname":"$productDetails.name",
+                "images":"$productDetails.images",
+                "price":"$productDetails.price",
+                "quantity":"$items.quantity"
+              }
+            }
+               
+           
+          ]
+          const userCart=await Cart.aggregate(pipeline)
+
+          let total=0
+          userCart.map(async (item)=>{
+            total+=item.price*item.quantity
+          })
+
+          return {userCart,total}
+    }
+
+
+
+    
 
     public async addProductToCart(userID:string,productID:Schema.Types.ObjectId,quantity:number){
         // Find the user's cart
         let cart = await Cart.findOne({ user: userID });
 
         console.log("prod ID:",productID);
-        
+       
 
         const product = await Product.findById(productID);
         if (!product) {
@@ -48,6 +139,8 @@ export class CartService{
         // Save the cart
         await cart.save();
         return cart;
+        
+        
 
     }
 
@@ -94,6 +187,8 @@ export class CartService{
         }
         // Find the user's cart
         let cart = await Cart.findOne({ user: userID });
+
+        
     
         if (!cart) {
            throw new NotFoundError("cart not found ")
@@ -101,6 +196,7 @@ export class CartService{
 
         cart.items=[]
         
-        await cart.save();
+        await cart.save()
     }
+
 }
