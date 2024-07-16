@@ -72,7 +72,7 @@ export class AuthInterceptor implements HttpInterceptor {
     switch (error.status) {
       case 401:
       case 403:
-        this.router.navigate(['authentication/login']);
+        this.router.navigate(['/login']);
         handled = true;
         break;
     }

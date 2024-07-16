@@ -58,7 +58,7 @@ export class ProduController{
     public async getAllBooks(req: Request, res: Response,next:NextFunction): Promise<void>{
         try {
             const page = parseInt(req.query.page as string) || 1;
-            const limit = parseInt(req.query.limit as string) || 10;
+            const limit = parseInt(req.query.limit as string) || 20;
             const searchQuery: string = req.query.search as string;
             const category: any = req.query.category as string;
             const pdfss :string=req.query.pdf as string

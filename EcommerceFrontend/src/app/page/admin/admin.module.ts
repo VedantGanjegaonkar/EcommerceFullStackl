@@ -8,10 +8,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { LayoutsModule } from "../../layouts/layouts.module";
 
 @NgModule({
   declarations: [
-    AddProductsComponent
+    AddProductsComponent,
+    AdminHomeComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
-  ]
+    MatIconModule,
+    LayoutsModule
+]
 })
 export class AdminModule { }

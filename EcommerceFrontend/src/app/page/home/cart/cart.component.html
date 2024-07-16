@@ -16,6 +16,29 @@
     <div class="text-right mt-4">
       <h4>Total: {{ total | currency }}</h4>
     </div>
+    <div *ngIf="newTotal>0" class="text-right mt-4">
+      <h4>NewTotal: {{ newTotal | currency }}</h4>
+    </div>
+  </div>
+
+  <div  class="container mt-5">
+    <h2 class="mb-4">active Coupens</h2>
+   
+      <div *ngFor="let coupon of counpens" class="list-group">
+        <p>{{ coupon.name }}</p>
+
+        <div *ngIf="total>coupon.c_total">
+          <p *ngIf="coupon.c_val<100">Your Discount:{{coupon.c_val*total}}</p>  
+        </div>
+
+        <div *ngIf="total>coupon.c_total">
+          <p *ngIf="coupon.c_val>100">Your Discount:{{coupon.c_val}}</p>
+        </div>
+       
+
+        <button [disabled]="total<coupon.c_total" class="btn w-25 btn-danger mt-3" (click)="applyC(coupon.c_val)">apply</button>
+      </div>
+   
   </div>
 
   

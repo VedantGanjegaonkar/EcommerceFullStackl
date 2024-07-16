@@ -7,13 +7,16 @@
     <div *ngIf="product.images">
       <img [src]="product.images" class="img-fluid" alt="{{ product.name }}">
     </div>
-    <img src="http://localhost:3000/public/uploads/1720767307318-th.jfif" alt="test-img">
+    <!-- <img src="http://localhost:3000/public/uploads/1720767307318-th.jfif" alt="test-img"> -->
     <button (click)="toProductList()" class="btn btn-secondary mt-3">Back</button>
 
     <label for="">Qut</label>
+    <button (click)="minusQnt()">-</button>
     <input [(ngModel)]="qnt" type="number" name="" id="">
+    <button *ngIf="product.stock>1" (click)="addQnt()">+</button>
     
-    <button (click)="addToCart()" class="btn btn-danger mt-3">Add to cart</button>
+   
+    <button *ngIf="qnt<product.stock" (click)="addToCart()" class="btn btn-danger mt-3">Add to cart</button>
 
 </div>
   

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/core/services/product.service';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,12 @@ export class CartComponent implements OnInit {
 
   cart?:any[];
   total:number=0
+  newTotal:number=0
+
+counpens:any[]=[
+  {id:1, name:`10 percent, above 1478400 `, c_total:1478400,c_val:0.1},
+  {id:1, name:"Flat 250rs cashback, above 2000", c_total:2000, c_val:250},
+]
 
   ngOnInit():void{
     this.loadCart()
@@ -40,8 +47,15 @@ export class CartComponent implements OnInit {
   },error => {
   console.error('Error fetching cart:', error);
 })
+}
 
-
+applyC(c_val:number){
+  if(c_val<100){
+    this.newTotal=this.total-(this.total*c_val)
+  } 
+  else{
+    this.newTotal=this.total-c_val
   }
+}
 
 }

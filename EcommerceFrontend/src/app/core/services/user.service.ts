@@ -38,7 +38,7 @@ export class UserService {
       return false;
     }
     const decodedToken = jwtDecode<any>(token);
-    return decodedToken.role === 'admin';
+    return decodedToken.role === '6654724561af1ee31ccc7a1a';
   }
 
   getUserIdFromToken(): string  {

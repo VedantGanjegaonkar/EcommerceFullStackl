@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
           if(this.authService.isAdmin()){
                   console.log("hello admin");
 
-            this.router.navigate(['/adminHome']);
+            this.router.navigate(['/pages/admin/home']);
           }else{
-            this.router.navigate(['/products']); // Redirect to home page on success
+            this.router.navigate(['/product']); // Redirect to home page on success
               console.log("hello user");
 
           }

@@ -1,16 +1,23 @@
 <div class="container">
-    <h2>Product List</h2>
-    <div *ngFor="let product of products" class="card mb-3 d-flex justify-content-centre">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.description }}</p>
-        <p class="card-text"><strong>Price:</strong> {{ product.price | currency }}</p>
-        <p class="card-text"><strong>Stock:</strong> {{ product.stock }}</p>
-        <div *ngIf="product.images">
-            <img [src]="product.images" class="img-fluid" alt="{{ product.name }}">
+  <h2 class="my-4 text-center">Product List</h2>
+  <div class="row">
+      <div *ngFor="let product of products" class="col-md-4 mb-4 d-flex align-items-stretch">
+          <div class="card w-100">
+              <img *ngIf="product.images" [src]="product.images" class="card-img-top fixed-height" alt="{{ product.name }}">
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.description }}</p>
+                  <p class="card-text"><strong>Price:</strong> {{ product.price | currency }}</p>
+                  <p class="card-text"><strong>Vendor:</strong> {{ product.venderName }}</p>
+                  <p class="card-text"><strong>Categories:</strong> 
+                    <span *ngFor="let category of product.categoryName; let isLast = last">
+                      {{ category }}<span *ngIf="!isLast">, </span>
+                    </span>
+                  </p>
+                  <a (click)="viewProductDetails(product._id)" class="btn btn-primary mt-auto">View Details</a>
+              </div>
           </div>
-        <a (click)="viewProductDetails(product._id)" class="btn btn-primary">View Details</a>
       </div>
-    </div>
+  </div>
 </div>
-  
+

@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  product: any;
+  product!: any;
+  
   qnt:number=1
   searchText:string="mens Wear"
-  imageUrl:string = "public/uploads/1720767307318-th.jfif"
+  // imageUrl:string = "public/uploads/1720767307318-th.jfif"
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -27,6 +28,7 @@ export class ProductDetailComponent implements OnInit {
       console.log("prod: ",data.product);
       
       this.product = data.product;
+      this.product.images = `http://localhost:3000/${data.product.images}`;
     }, error => {
       console.error('Error fetching product details:', error);
     });
@@ -42,4 +44,15 @@ export class ProductDetailComponent implements OnInit {
     });
     console.log(this.qnt,this.product._id);
   }
+
+  addQnt(){
+    
+      this.qnt++
+    
+  }
+  minusQnt(){
+    if(this.qnt>1){
+      this.qnt=this.qnt-1
+  }
+}
 }

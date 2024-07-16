@@ -16,9 +16,19 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe((data: any) => {
-      this.products = data.products
+      this.products = data.products.map((item:any)=>({
+
+        _id : item._id,
+        name: item.name,
+        description:item.description,
+        images:`http://localhost:3000/${item.images}`,
+        price:item.price,
+        categoryName:item.categoryName,     //it is an array of categoryname
+        venderName:item.venderName,
+        
+      }))
      
-      console.log("data:",data);
+      console.log("data:",data.products);
       
     }, error => {
       console.error('Error fetching products:', error);

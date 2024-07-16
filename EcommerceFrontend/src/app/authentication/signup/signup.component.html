@@ -1,17 +1,11 @@
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="container mt-5">
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" id="firstName" formControlName="firstName" class="form-control">
-      <div *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched" class="text-danger">
-        First Name is required
-      </div>
-    </div>
+
   
     <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" id="lastName" formControlName="lastName" class="form-control">
-      <div *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched" class="text-danger">
-        Last Name is required
+      <label for="username" class="form-label">User Name</label>
+      <input type="text" id="username" formControlName="username" class="form-control">
+      <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched" class="text-danger">
+        username Name is required
       </div>
     </div>
   
@@ -39,21 +33,23 @@
       </div>
     </div>
   
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <label for="role" class="form-label">Role</label>
       <select id="role" formControlName="role" class="form-select">
         <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
       </select>
-    </div>
+    </div> -->
   
-    <div class="mb-3 form-check">
+    <!-- <div class="mb-3 form-check">
       <input type="checkbox" id="acceptTerms" formControlName="acceptTerms" class="form-check-input">
       <label for="acceptTerms" class="form-check-label">I accept the terms and conditions</label>
       <div *ngIf="registrationForm.get('acceptTerms')?.invalid && registrationForm.get('acceptTerms')?.touched" class="text-danger">
         Please accept the terms and conditions
       </div>
-    </div>
+    </div> -->
   
     <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-primary">Register</button>
+    <span class="m-5">ALready have an account? then login</span>
+              <button  class="btn btn-primary" routerLink="/login" routerLinkActive="active" >login</button>
   </form>
-  
+

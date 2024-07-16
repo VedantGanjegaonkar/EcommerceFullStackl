@@ -65,6 +65,7 @@ export class ProductService {
           name: 1,
           price: 1,
           description: 1,
+          images:1,
           "categoryName": "$categoryDetails.name",
           "venderName": "$venderDetails.username"
         }

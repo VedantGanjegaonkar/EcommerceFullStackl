@@ -1,0 +1,8 @@
+.navbar-nav .nav-item .nav-link.active {
+    font-weight: bold;
+    color: #007bff !important;
+}
+
+.navbar-nav .nav-item .fa-shopping-cart {
+    font-size: 1.5em;
+}
